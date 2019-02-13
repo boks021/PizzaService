@@ -1,0 +1,61 @@
+
+<!--{{orderedPizza | json}}-->
+
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Price</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let one of orderedPizza; let i = index">
+      <td>{{i+1}}.</td>
+      <td>{{one.name}}</td>
+      <td>{{one.price}}$</td>
+    </tr>
+  </tbody>
+  <h3>Total : {{ukupnaCena.toFixed(2)}}$</h3>
+</table>
+
+
+<form (ngSubmit)="submit()" #varijabla="ngForm" novalidate>
+  <div class="modal-boy">
+    <div class="container">
+      <div class="form-group">
+         <label>Address</label>
+          <input type="text" placeholder="Street name and number" class="form-control" name="address"
+          [(ngModel)]="order.address" #varijabla1="ngModel" required>
+          <small class="text-danger" 
+          *ngIf="varijabla1.touched && varijabla1.errors?.required">
+          Address is required</small>
+        </div>
+      <div class="form-group">
+          <label>Appartment</label>
+        <input class="form-control" placeholder="Floor and flat number" name="appartment"
+        [(ngModel)]="order.appartment" #varijabla2="ngModel" required>
+        <small class="text-danger" 
+        *ngIf="varijabla2.touched && varijabla2.errors?.required">
+        Appartment data is required</small>
+      </div>
+      <div class="form-group">
+          <label>Telephone</label>
+        <input class="form-control" placeholder="Telephone" name="telephone"
+        [(ngModel)]="order.telephone" #varijabla3="ngModel" required>
+        <small class="text-danger" 
+        *ngIf="varijabla3.touched && varijabla3.errors?.required">
+        Telephone number is required</small>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <button class="btn btn-danger" type="submit" [disabled]="varijabla.form.invalid"
+    >Order</button>
+  </div>
+  <br/>
+</form>
+<!--(click)="activeModal.close('Order click')"-->

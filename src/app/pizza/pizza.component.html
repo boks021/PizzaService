@@ -1,0 +1,64 @@
+<!--{{pizza | json}}-->
+<br/>
+<div class="row">
+    <div class="col-7">
+        <div class="form-check form-check-inline">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" class="form-check-input uvecaj" [(ngModel)]="params.discount" 
+            (change)="sortDis(params.discount)" name="discount">
+            <label class="form-check-label">Discount</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div class="form-check form-check-inline">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <input type="checkbox" class="form-check-input uvecaj" [(ngModel)]="params.vegetarian" 
+            (change)="sortVeg(params.vegetarian)" name="vegetarian">
+            <label class="form-check-label">Vegetarian</label>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="row">
+            <div class="col-6 text-right">
+             <img src="../../assets/images/shopping-cart.jpg" width=70%>
+             </div>
+             <div class="col-6">
+               
+                <p *ngIf="orderedPizza.length == 0"><b>Your cart is empty</b> </p>
+                
+                <p *ngIf="orderedPizza.length != 0"><b>{{orderedPizza.length}} items in cart</b><br/> 
+                <b>(total {{(ukupnaCena).toFixed(2)}} $)</b><br/>
+                <button type="button" class="btn btn-danger" (click)="open(orderedPizza , ukupnaCena)">Checkout</button>
+                </p>
+            </div> 
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6" *ngFor="let p of pizza?.results">
+        <div class="row">
+            <div class="col-5">
+                <img src="{{'../../../../assets/images/pizzas/' + p.picture}}" width=100%>
+            </div>      
+            <div class="col-7">
+                <h3>{{p.name}}</h3>
+                <p>{{p.description}}</p>
+                <p><b>{{p.price}}$</b> <b class="float-right">{{p.grade}}/5</b></p>
+                <div class="row">
+                    <div class="col-3">
+                        <p *ngIf="p.discount"><img src="../../assets/images/discount.png" width=100%></p>
+                    </div>
+                    <div class="col-3">
+                        <p *ngIf="p.vegetarian"><img src="../../assets/images/vegetarian.png" width=100%></p>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-danger float-right" (click)="addPizza(p._id)">Add to cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br/>
+    </div>
+    
+</div>
+
